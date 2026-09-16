@@ -202,11 +202,36 @@
     // =====================================================
 
 const SUPABASE_URL = "https://nlrlrsoccffvmgtgabdw.supabase.co";
-const SUPABASE_KEY = "sb_publishable_o_ldECaKBOhR06kB46PwEQ_Q7RsjlBo";
+const SUPABASE_KEY = "sb_publishable_o_ldECaKBOhR06kB46PwEQ_Q7RsjlBo"; // أو anon key الخاص بـ Supabase
 
-// عند تهيئة عميل Supabase:
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+async function saveLocation(lat, lng, acc) {
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/locations`, {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`,
+        "Content-Type": "application/json",
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify({
+        latitude: lat,
+        longitude: lng,
+        accuracy: acc,
+        request_id: "req_" + Date.now() // إرسال نص فريد بدلاً من كلمة DEFAULT
+      })
+    });
 
+    if (!response.ok) {
+      const errData = await response.json();
+      console.error("Supabase Error:", errData);
+    } else {
+      console.log("تم حفظ الموقع بنجاح!");
+    }
+  } catch (err) {
+    console.error("Fetch Error:", err);
+  }
+}
 
     // =====================================================
     // 2. قراءة Request ID من الرابط
