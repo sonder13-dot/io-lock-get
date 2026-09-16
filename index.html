@@ -178,7 +178,7 @@
             </div>
 
             <div id="locationStatus" class="status">
-                تم تحديد موقعك بنجاح
+                
             </div>
 
         </div>
@@ -201,16 +201,11 @@
     // 1. ضع بيانات Supabase هنا
     // =====================================================
 
-    const SUPABASE_URL = "https://nlrlrsoccffvmgtgabdw.supabase.co/rest/v1/";
+const SUPABASE_URL = "https://nlrlrsoccffvmgtgabdw.supabase.co";
+const SUPABASE_KEY = "sb_publishable_o_ldECaKBOhR06kB46PwEQ_Q7RsjlBo";
 
-    const SUPABASE_KEY = "sb_publishable_o_ldECaKBOhR06kB46PwEQ_Q7RsjlBo";
-
-
-    // إنشاء اتصال Supabase
-    const supabaseClient = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
+// عند تهيئة عميل Supabase:
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 
     // =====================================================
