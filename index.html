@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>طقس العراق</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,658 +19,1083 @@
         }
 
         body {
-            font-family: Arial, Tahoma, sans-serif;
+
+            font-family:
+                Arial,
+                Tahoma,
+                sans-serif;
+
             min-height: 100vh;
-            background: linear-gradient(135deg, #4facfe, #00c6ff);
-            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4facfe 0%,
+                    #00c6ff 100%
+                );
+
+            color: white;
+
         }
+
 
         .container {
+
             width: 100%;
+
             max-width: 1100px;
+
             margin: auto;
+
             padding: 25px;
+
         }
+
 
         header {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
-            margin-bottom: 35px;
+
+            margin-bottom: 30px;
+
         }
+
 
         .logo {
-            font-size: 26px;
+
+            font-size: 27px;
+
             font-weight: bold;
+
         }
 
-        .location-button {
-            border: none;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 12px 18px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 15px;
-            transition: 0.2s;
+
+        .country {
+
+            font-size: 14px;
+
+            opacity: 0.85;
+
         }
 
-        .location-button:hover {
-            background: rgba(255,255,255,0.35);
-        }
 
-        .main-card {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(15px);
+        .weather-card {
+
+            background:
+                rgba(255,255,255,0.16);
+
+            backdrop-filter:
+                blur(15px);
+
+            -webkit-backdrop-filter:
+                blur(15px);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.2);
+
             border-radius: 25px;
+
             padding: 35px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,0.15);
+
         }
 
-        .city-selector {
-            margin-bottom: 30px;
+
+        .location {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
         }
 
-        select {
-            width: 100%;
-            max-width: 350px;
-            padding: 14px;
-            border-radius: 12px;
-            border: none;
-            font-size: 16px;
-            outline: none;
+
+        .city {
+
+            font-size: 36px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
         }
 
-        .weather-main {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .city-name {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
 
         .date {
+
+            font-size: 15px;
+
             opacity: 0.85;
-            margin-bottom: 20px;
+
         }
+
+
+        .weather-main {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 70px;
+
+            padding: 20px 0 35px;
+
+        }
+
 
         .temperature {
-            font-size: 75px;
+
+            font-size: 85px;
+
             font-weight: bold;
+
+            line-height: 1;
+
         }
+
 
         .condition {
-            font-size: 22px;
-            margin-top: 10px;
+
+            font-size: 21px;
+
+            margin-top: 15px;
+
+            text-align: center;
+
         }
+
 
         .weather-icon {
-            font-size: 100px;
+
+            font-size: 105px;
+
         }
+
 
         .details {
+
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
             gap: 15px;
-            margin-top: 35px;
+
         }
 
-        .detail-card {
-            background: rgba(255,255,255,0.14);
+
+        .detail {
+
+            background:
+                rgba(255,255,255,0.13);
+
             border-radius: 18px;
-            padding: 20px;
+
+            padding: 22px;
+
             text-align: center;
+
         }
+
 
         .detail-title {
+
+            font-size: 14px;
+
             opacity: 0.8;
-            margin-bottom: 8px;
+
+            margin-bottom: 10px;
+
         }
+
 
         .detail-value {
-            font-size: 20px;
+
+            font-size: 22px;
+
             font-weight: bold;
+
         }
 
-        .location-info {
+
+        .location-status {
+
             margin-top: 25px;
+
             padding: 15px;
-            background: rgba(0,0,0,0.1);
-            border-radius: 12px;
-            display: none;
+
+            border-radius: 15px;
+
+            background:
+                rgba(255,255,255,0.10);
+
+            text-align: center;
+
             font-size: 14px;
+
+            display: none;
+
         }
+
 
         .loading {
-            display: none;
+
             text-align: center;
+
             padding: 30px;
+
             font-size: 18px;
+
         }
+
+
+        .permission-message {
+
+            text-align: center;
+
+            padding: 35px 20px;
+
+        }
+
+
+        .permission-icon {
+
+            font-size: 55px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .permission-title {
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .permission-text {
+
+            font-size: 15px;
+
+            line-height: 1.8;
+
+            opacity: 0.9;
+
+            max-width: 600px;
+
+            margin: auto;
+
+        }
+
 
         .error {
-            margin-top: 20px;
-            background: rgba(255,0,0,0.2);
-            padding: 15px;
-            border-radius: 12px;
+
             display: none;
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            background:
+                rgba(255,0,0,0.20);
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            line-height: 1.7;
+
         }
+
 
         footer {
+
             text-align: center;
+
             margin-top: 25px;
-            opacity: 0.7;
+
             font-size: 13px;
+
+            opacity: 0.65;
+
         }
 
-        @media (max-width: 700px) {
+
+        .hidden {
+
+            display: none !important;
+
+        }
+
+
+        @media(max-width: 700px) {
+
+            .container {
+
+                padding: 15px;
+
+            }
+
 
             header {
+
                 flex-direction: column;
-                gap: 15px;
-                align-items: stretch;
+
+                gap: 8px;
+
+                text-align: center;
+
             }
+
+
+            .weather-card {
+
+                padding: 25px 18px;
+
+            }
+
 
             .weather-main {
+
                 flex-direction: column;
-                text-align: center;
+
+                gap: 25px;
+
             }
 
-            .details {
-                grid-template-columns: 1fr;
-            }
 
             .temperature {
-                font-size: 60px;
+
+                font-size: 65px;
+
             }
+
 
             .weather-icon {
+
                 font-size: 80px;
+
             }
 
-            .main-card {
-                padding: 25px 18px;
+
+            .details {
+
+                grid-template-columns: 1fr;
+
             }
+
+
+            .city {
+
+                font-size: 30px;
+
+            }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
+
 
     <header>
 
         <div class="logo">
+
             🌤️ طقس العراق
+
         </div>
 
-        <button class="location-button" onclick="getMyLocation()">
-            📍 استخدام موقعي
-        </button>
+
+        <div class="country">
+
+            🇮🇶 حالة الطقس في العراق
+
+        </div>
 
     </header>
 
 
-    <div class="main-card">
 
-        <div class="city-selector">
+    <div class="weather-card">
 
-            <select id="citySelect" onchange="loadCityWeather()">
 
-                <option value="33.3152,44.3661,Baghdad,بغداد">
-                    بغداد
-                </option>
+        <!-- Loading -->
 
-                <option value="30.5085,47.7804,Basra,البصرة">
-                    البصرة
-                </option>
+        <div id="loading"
+             class="loading">
 
-                <option value="36.1911,44.0092,Erbil,أربيل">
-                    أربيل
-                </option>
-
-                <option value="36.3350,43.1189,Mosul,الموصل">
-                    الموصل
-                </option>
-
-                <option value="32.0000,44.3333,Najaf,النجف">
-                    النجف
-                </option>
-
-                <option value="32.6160,44.0249,Karbala,كربلاء">
-                    كربلاء
-                </option>
-
-                <option value="31.9889,44.9250,Diwaniyah,الديوانية">
-                    الديوانية
-                </option>
-
-                <option value="32.7500,44.6333,Hillah,الحلة">
-                    الحلة
-                </option>
-
-                <option value="34.6100,43.6793,Kirkuk,كركوك">
-                    كركوك
-                </option>
-
-            </select>
+            جاري تحديد موقعك...
 
         </div>
 
 
-        <div class="loading" id="loading">
-            جاري تحميل حالة الطقس...
+
+        <!-- Permission / Error message -->
+
+        <div id="permissionMessage"
+             class="permission-message hidden">
+
+            <div class="permission-icon">
+
+                📍
+
+            </div>
+
+
+            <div class="permission-title">
+
+                تحديد موقعك
+
+            </div>
+
+
+            <div class="permission-text">
+
+                للحصول على حالة الطقس الحالية
+                لموقعك، يرجى السماح للمتصفح
+                بالوصول إلى موقعك.
+
+                <br><br>
+
+                سيتم استخدام موقعك لعرض
+                حالة الطقس المناسبة لموقعك.
+
+            </div>
+
         </div>
 
 
-        <div class="weather-main">
 
-            <div>
+        <!-- Weather -->
 
-                <div class="city-name" id="cityName">
-                    بغداد
+        <div id="weatherContent"
+             class="hidden">
+
+
+            <div class="location">
+
+                <div id="city"
+                     class="city">
+
+                    موقعك الحالي
+
                 </div>
 
-                <div class="date" id="date">
+
+                <div id="date"
+                     class="date">
+
                     --
-                </div>
 
-                <div class="temperature">
-                    <span id="temperature">--</span>°C
-                </div>
-
-                <div class="condition" id="condition">
-                    --
                 </div>
 
             </div>
 
 
-            <div class="weather-icon" id="weatherIcon">
-                🌤️
+
+            <div class="weather-main">
+
+
+                <div>
+
+                    <div class="temperature">
+
+                        <span id="temperature">
+                            --
+                        </span>
+
+                        °C
+
+                    </div>
+
+
+                    <div id="condition"
+                         class="condition">
+
+                        --
+
+                    </div>
+
+                </div>
+
+
+
+                <div id="weatherIcon"
+                     class="weather-icon">
+
+                    🌤️
+
+                </div>
+
+
             </div>
+
+
+
+            <div class="details">
+
+
+                <div class="detail">
+
+                    <div class="detail-title">
+
+                        💧 الرطوبة
+
+                    </div>
+
+
+                    <div class="detail-value">
+
+                        <span id="humidity">
+                            --
+                        </span>
+
+                        %
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="detail">
+
+                    <div class="detail-title">
+
+                        💨 سرعة الرياح
+
+                    </div>
+
+
+                    <div class="detail-value">
+
+                        <span id="wind">
+                            --
+                        </span>
+
+                        km/h
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="detail">
+
+                    <div class="detail-title">
+
+                        🌡️ الإحساس
+
+                    </div>
+
+
+                    <div class="detail-value">
+
+                        <span id="feelsLike">
+                            --
+                        </span>
+
+                        °C
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div id="locationStatus"
+                 class="location-status">
+
+                📍 تم تحديد موقعك بنجاح
+
+            </div>
+
 
         </div>
 
 
-        <div class="details">
 
-            <div class="detail-card">
+        <!-- Error -->
 
-                <div class="detail-title">
-                    💧 الرطوبة
-                </div>
-
-                <div class="detail-value">
-                    <span id="humidity">--</span>%
-                </div>
-
-            </div>
-
-
-            <div class="detail-card">
-
-                <div class="detail-title">
-                    💨 سرعة الرياح
-                </div>
-
-                <div class="detail-value">
-                    <span id="wind">--</span> km/h
-                </div>
-
-            </div>
-
-
-            <div class="detail-card">
-
-                <div class="detail-title">
-                    🌡️ الإحساس
-                </div>
-
-                <div class="detail-value">
-                    <span id="feelsLike">--</span>°C
-                </div>
-
-            </div>
+        <div id="error"
+             class="error">
 
         </div>
 
-
-        <div class="location-info" id="locationInfo">
-
-            📍 تم تحديد موقعك
-
-            <br><br>
-
-            Latitude:
-            <span id="latitude">--</span>
-
-            <br>
-
-            Longitude:
-            <span id="longitude">--</span>
-
-            <br>
-
-            Accuracy:
-            <span id="accuracy">--</span> meters
-
-        </div>
-
-
-        <div class="error" id="error">
-        </div>
 
     </div>
 
 
     <footer>
-        بيانات الطقس مقدمة بواسطة Open-Meteo
+
+        بيانات الطقس بواسطة Open-Meteo
+
     </footer>
+
 
 </div>
 
 
+
 <script>
 
-    const weatherDescriptions = {
 
-        0: ["سماء صافية", "☀️"],
-        1: ["غائم جزئياً", "🌤️"],
-        2: ["غائم جزئياً", "⛅"],
-        3: ["غائم", "☁️"],
-
-        45: ["ضباب", "🌫️"],
-        48: ["ضباب", "🌫️"],
-
-        51: ["رذاذ خفيف", "🌦️"],
-        53: ["رذاذ", "🌦️"],
-        55: ["رذاذ كثيف", "🌧️"],
-
-        61: ["أمطار خفيفة", "🌧️"],
-        63: ["أمطار", "🌧️"],
-        65: ["أمطار غزيرة", "🌧️"],
-
-        71: ["ثلوج خفيفة", "🌨️"],
-        73: ["ثلوج", "🌨️"],
-        75: ["ثلوج غزيرة", "❄️"],
-
-        80: ["زخات مطر", "🌦️"],
-        81: ["زخات مطر", "🌧️"],
-        82: ["زخات مطر قوية", "⛈️"],
-
-        95: ["عاصفة رعدية", "⛈️"],
-        96: ["عاصفة رعدية", "⛈️"],
-        99: ["عاصفة رعدية", "⛈️"]
-
-    };
+/* =========================================
+   Weather descriptions
+========================================= */
 
 
-    function showLoading(show) {
+const weatherDescriptions = {
 
-        document.getElementById("loading").style.display =
-            show ? "block" : "none";
+    0: ["سماء صافية", "☀️"],
 
-    }
+    1: ["غائم جزئياً", "🌤️"],
+
+    2: ["غائم جزئياً", "⛅"],
+
+    3: ["غائم", "☁️"],
+
+    45: ["ضباب", "🌫️"],
+
+    48: ["ضباب", "🌫️"],
+
+    51: ["رذاذ خفيف", "🌦️"],
+
+    53: ["رذاذ", "🌦️"],
+
+    55: ["رذاذ كثيف", "🌧️"],
+
+    61: ["أمطار خفيفة", "🌧️"],
+
+    63: ["أمطار", "🌧️"],
+
+    65: ["أمطار غزيرة", "🌧️"],
+
+    71: ["ثلوج خفيفة", "🌨️"],
+
+    73: ["ثلوج", "🌨️"],
+
+    75: ["ثلوج غزيرة", "❄️"],
+
+    80: ["زخات مطر", "🌦️"],
+
+    81: ["زخات مطر", "🌧️"],
+
+    82: ["زخات مطر قوية", "⛈️"],
+
+    95: ["عاصفة رعدية", "⛈️"],
+
+    96: ["عاصفة رعدية", "⛈️"],
+
+    99: ["عاصفة رعدية", "⛈️"]
+
+};
 
 
-    function showError(message) {
 
-        const error = document.getElementById("error");
-
-        error.innerText = message;
-
-        error.style.display = "block";
-
-    }
+/* =========================================
+   Elements
+========================================= */
 
 
-    function hideError() {
+const loading =
+    document.getElementById("loading");
 
-        document.getElementById("error").style.display = "none";
+const weatherContent =
+    document.getElementById("weatherContent");
 
-    }
+const permissionMessage =
+    document.getElementById("permissionMessage");
+
+const errorBox =
+    document.getElementById("error");
 
 
-    function formatDate() {
 
-        const now = new Date();
+/* =========================================
+   Date
+========================================= */
 
-        return now.toLocaleDateString("ar-IQ", {
 
+function getDate() {
+
+    const now = new Date();
+
+    return now.toLocaleDateString(
+        "ar-IQ",
+        {
             weekday: "long",
-
             year: "numeric",
-
             month: "long",
-
             day: "numeric"
-
-        });
-
-    }
-
-
-    async function getWeather(latitude, longitude, cityName) {
-
-        showLoading(true);
-
-        hideError();
-
-        try {
-
-            const url =
-                `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&timezone=auto`;
-
-            const response = await fetch(url);
-
-            if (!response.ok) {
-
-                throw new Error("Weather API error");
-
-            }
-
-            const data = await response.json();
-
-            const current = data.current;
-
-
-            const weatherCode = current.weather_code;
-
-            const weather =
-                weatherDescriptions[weatherCode] ||
-                ["حالة جوية غير معروفة", "🌤️"];
-
-
-            document.getElementById("cityName").innerText =
-                cityName;
-
-
-            document.getElementById("date").innerText =
-                formatDate();
-
-
-            document.getElementById("temperature").innerText =
-                Math.round(current.temperature_2m);
-
-
-            document.getElementById("condition").innerText =
-                weather[0];
-
-
-            document.getElementById("weatherIcon").innerText =
-                weather[1];
-
-
-            document.getElementById("humidity").innerText =
-                current.relative_humidity_2m;
-
-
-            document.getElementById("wind").innerText =
-                Math.round(current.wind_speed_10m);
-
-
-            document.getElementById("feelsLike").innerText =
-                Math.round(current.apparent_temperature);
-
         }
+    );
 
-        catch (error) {
+}
 
-            showError(
-                "حدث خطأ أثناء تحميل حالة الطقس. حاول مرة أخرى."
+
+
+/* =========================================
+   Error
+========================================= */
+
+
+function showError(message) {
+
+    loading.classList.add("hidden");
+
+    weatherContent.classList.add("hidden");
+
+    permissionMessage.classList.remove("hidden");
+
+    errorBox.innerText = message;
+
+    errorBox.style.display = "block";
+
+}
+
+
+
+/* =========================================
+   Weather API
+========================================= */
+
+
+async function getWeather(
+    latitude,
+    longitude
+) {
+
+    try {
+
+
+        const url =
+            "https://api.open-meteo.com/v1/forecast" +
+
+            "?latitude=" +
+            latitude +
+
+            "&longitude=" +
+            longitude +
+
+            "&current=" +
+
+            "temperature_2m," +
+
+            "relative_humidity_2m," +
+
+            "apparent_temperature," +
+
+            "weather_code," +
+
+            "wind_speed_10m" +
+
+            "&timezone=auto";
+
+
+
+        const response =
+            await fetch(url);
+
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Weather API Error"
             );
 
         }
 
-        finally {
 
-            showLoading(false);
 
-        }
+        const data =
+            await response.json();
+
+
+
+        const current =
+            data.current;
+
+
+
+        const weatherCode =
+            current.weather_code;
+
+
+
+        const weather =
+            weatherDescriptions[
+                weatherCode
+            ] ||
+            [
+                "حالة جوية غير معروفة",
+                "🌤️"
+            ];
+
+
+
+        document.getElementById(
+            "temperature"
+        ).innerText =
+            Math.round(
+                current.temperature_2m
+            );
+
+
+
+        document.getElementById(
+            "condition"
+        ).innerText =
+            weather[0];
+
+
+
+        document.getElementById(
+            "weatherIcon"
+        ).innerText =
+            weather[1];
+
+
+
+        document.getElementById(
+            "humidity"
+        ).innerText =
+            current.relative_humidity_2m;
+
+
+
+        document.getElementById(
+            "wind"
+        ).innerText =
+            Math.round(
+                current.wind_speed_10m
+            );
+
+
+
+        document.getElementById(
+            "feelsLike"
+        ).innerText =
+            Math.round(
+                current.apparent_temperature
+            );
+
+
+
+        document.getElementById(
+            "date"
+        ).innerText =
+            getDate();
+
+
+
+        document.getElementById(
+            "city"
+        ).innerText =
+            "موقعك الحالي";
+
+
+
+        loading.classList.add(
+            "hidden"
+        );
+
+
+
+        permissionMessage.classList.add(
+            "hidden"
+        );
+
+
+
+        errorBox.style.display =
+            "none";
+
+
+
+        weatherContent.classList.remove(
+            "hidden"
+        );
+
+
+
+        document.getElementById(
+            "locationStatus"
+        ).style.display =
+            "block";
+
 
     }
 
+    catch (error) {
 
-    function loadCityWeather() {
-
-        const value =
-            document.getElementById("citySelect").value;
-
-        const parts = value.split(",");
-
-        const latitude = parts[0];
-
-        const longitude = parts[1];
-
-        const englishName = parts[2];
-
-        const arabicName = parts[3];
-
-        getWeather(
-            latitude,
-            longitude,
-            arabicName
+        showError(
+            "حدث خطأ أثناء تحميل حالة الطقس."
         );
 
     }
 
+}
 
-    function getMyLocation() {
 
-        hideError();
 
-        if (!navigator.geolocation) {
+/* =========================================
+   Request Location
+========================================= */
 
-            showError(
-                "المتصفح لا يدعم تحديد الموقع."
+
+function requestLocation() {
+
+
+    if (!navigator.geolocation) {
+
+        showError(
+            "هذا المتصفح لا يدعم تحديد الموقع."
+        );
+
+        return;
+
+    }
+
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+
+            const latitude =
+                position.coords.latitude;
+
+
+            const longitude =
+                position.coords.longitude;
+
+
+
+            getWeather(
+                latitude,
+                longitude
             );
 
-            return;
 
-        }
-
-
-        navigator.geolocation.getCurrentPosition(
-
-            async function(position) {
-
-                const latitude =
-                    position.coords.latitude;
-
-                const longitude =
-                    position.coords.longitude;
-
-                const accuracy =
-                    position.coords.accuracy;
+        },
 
 
-                document.getElementById("latitude")
-                    .innerText =
-                    latitude.toFixed(6);
+        function(error) {
 
 
-                document.getElementById("longitude")
-                    .innerText =
-                    longitude.toFixed(6);
+            loading.classList.add(
+                "hidden"
+            );
 
 
-                document.getElementById("accuracy")
-                    .innerText =
-                    Math.round(accuracy);
+            permissionMessage.classList.remove(
+                "hidden"
+            );
 
 
-                document.getElementById("locationInfo")
-                    .style.display =
-                    "block";
 
+            if (
+                error.code ===
+                error.PERMISSION_DENIED
+            ) {
 
-                getWeather(
-                    latitude,
-                    longitude,
-                    "موقعك الحالي"
+                showError(
+                    "يرجى السماح بالوصول إلى موقعك من نافذة المتصفح حتى نتمكن من عرض حالة الطقس لموقعك."
                 );
 
-            },
+            }
 
 
-            function(error) {
+            else if (
+                error.code ===
+                error.POSITION_UNAVAILABLE
+            ) {
 
-                if (error.code === 1) {
-
-                    showError(
-                        "تم رفض صلاحية الموقع. اسمح للموقع بالوصول إلى موقعك من إعدادات المتصفح."
-                    );
-
-                }
-
-                else if (error.code === 2) {
-
-                    showError(
-                        "تعذر تحديد موقعك."
-                    );
-
-                }
-
-                else if (error.code === 3) {
-
-                    showError(
-                        "انتهى وقت محاولة تحديد الموقع."
-                    );
-
-                }
-
-            },
-
-            {
-
-                enableHighAccuracy: true,
-
-                timeout: 15000,
-
-                maximumAge: 0
+                showError(
+                    "تعذر تحديد موقعك. تأكد من تشغيل خدمة الموقع في جهازك."
+                );
 
             }
 
-        );
+
+            else if (
+                error.code ===
+                error.TIMEOUT
+            ) {
+
+                showError(
+                    "استغرق تحديد الموقع وقتاً طويلاً. حاول تحديث الصفحة."
+                );
+
+            }
+
+
+        },
+
+
+        {
+
+            enableHighAccuracy: true,
+
+            timeout: 15000,
+
+            maximumAge: 0
+
+        }
+
+    );
+
+}
+
+
+
+/* =========================================
+   Start
+========================================= */
+
+
+window.addEventListener(
+    "load",
+    function() {
+
+        requestLocation();
 
     }
+);
 
-
-    // تحميل طقس بغداد عند فتح الصفحة
-
-    window.onload = function() {
-
-        loadCityWeather();
-
-    };
 
 </script>
 
+
 </body>
+
 </html>
